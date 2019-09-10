@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板测试</title>
+</head>
+<body>
+{#过滤器#}
+姓名：{{name |capfirst|upper}}
+<br>
+年龄段：
+{% if age > 18 and age < 40 %}
+<p>青壮年</p>
+{% elif age >= 40 %}
+    <p>中年</p>
+{% else %}
+    <p>少年</p>
+{% endif %}
+{#访问列表#}
+<h2>爱好{{ hobby }}</h2>{#爱好['eat', 'sing', 'pingpang']#}
+<h2>第一个爱好{{ hobby.1 }}</h2>
+<h2>分数{{ score }}</h2>{#分数{'shuxue': 89, 'yuwen': 100, 'yingyu': 90}#}
+<h2>数学成绩：{{ score.shuxue }}</h2>
+{#访问字典#}
+<h2>数学成绩：{{ score.shuxue }}</h2>
+{#访问函数#}
+<h2>{{ say.say }}</h2>
+{#循环#}
+<ol>
+    {% for one in hobby %}
+        <li>{{ one }}</li>
+    {% endfor %}
+</ol>
+{% for key,value in score.items %}
+<p>{{ key }}:{{ value }}</p>
+{% endfor %}
+{% for one in hobby reversed %}
+    {% if forloop.first %}
+{#        forloop记录循环次数，进行判断和控制#}
+        <p style="color: yellow">{{ forloop.counter }}.{{one}}</p>
+    {% elif forloop.last %}
+        <p style="color: aqua">{{ forloop.counter }}.{{ one }}</p>
+    {%  else %}
+        <p >{{ forloop.counter }}.{{ one }}</p>
+
+    {% endif %}
+{% endfor %}
+
+
+<h2>{{ say.say }}</h2>
+
+{{ myjs|safe }}
+</body>
+</html>
